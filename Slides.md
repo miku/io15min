@@ -118,6 +118,52 @@ type Writer interface {
 
 ----
 
+# Examples
 
+Few examples for usage and custom implementations.
 
+----
 
+# Empty reader and Discard
+
+* https://github.com/miku/exploreio/blob/master/Solutions.md#s20
+* https://github.com/miku/exploreio/blob/master/Solutions.md#s22
+
+----
+
+# Example: multireader
+
+* https://github.com/miku/exploreio/blob/master/Solutions.md#s12
+
+----
+
+# Example: Embedding a reader
+
+* https://github.com/miku/exploreio/blob/master/Solutions.md#s23
+
+----
+
+# Example: Endless stream
+
+* https://github.com/miku/exploreio/blob/master/Solutions.md#s25
+
+----
+
+# Example: Blackout
+
+* https://github.com/miku/exploreio/blob/master/s27a/main.go
+
+----
+
+# Example: stickyErrWriter
+
+* https://github.com/miku/exploreio/blob/master/s45/main.go
+
+From [live hacking](https://youtu.be/yG-UaBJXZ80?t=33m50s).
+
+----
+
+More:
+
+* https://golang.org/pkg/io/
+* https://github.com/miku/exploreio
