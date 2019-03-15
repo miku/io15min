@@ -94,6 +94,7 @@ Example, different JSON API structs, but each of them implements io.ReaderFrom, 
 
 * files, atomic files
 * buffered io
+* network connections
 * response bodies
 * compression algorithms
 * hash sums
