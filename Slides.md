@@ -1,7 +1,8 @@
 # Beautiful (and strange) I/O
 
-Lightning Talk, Go and Cloud Native Leipzig
-@BasislagerCo, golangleipzig.space, 2019-03-15, 19:00
+Lightning Talk, Go and Cloud Native Leipzig https://golangleipzig.space
+Martin Czygan
+@BasislagerCo, 2019-05-17, 19:00
 
 ----
 
@@ -52,7 +53,7 @@ From: [github.com/go4org/go4](https://github.com/go4org/go4).
 
 ----
 
-# Use cases
+# Use cases | io.ReaderAt
 
 * io.ReaderAt, io.WriterAt -- (parallel writes) with offset
 
@@ -61,26 +62,40 @@ Sidenote: For filesystems, there is a [pread(2) system call](http://man7.org/lin
 > read from or write to a file descriptor at a given offset ...
 > The pread() and pwrite() system calls are especially useful in **multithreaded applications**.  They allow multiple threads to perform I/O on the **same file descriptor** without being affected by changes to the file offset by other threads.
 
-----
-
-# Use cases
-
-* io.ReaderFrom -- a data structure, that know how to deserialize itself
-
-Example, different JSON API structs, but each of them implements io.ReaderFrom, so the data fetch can be separated --[fetchLocation(location string, r io.ReaderFrom)](https://github.com/miku/span/blob/86aeec55853b795e57ad80978f97caedc4000ea2/cmd/span-amsl-discovery/main.go#L130-L139)
+* HTTP [range request example](https://github.com/snabb/httpreaderat) (on zip without download)
 
 ----
 
-# Readers for types
+# Use cases | io.ReaderFrom
+
+* [Optimizing Copy](https://medium.com/go-walkthrough/go-walkthrough-io-package-8ac5e95a9fbd) 
+
+> To avoid using an intermediate buffer entirely, types can implement interfaces to read and write directly. When implemented, the Copy() function will avoid the intermediate buffer and use these implementations directly.
+
+* maybe: io.ReaderFrom &mdash; a data structure, that know how to deserialize itself
+
+> Example: different JSON API structs, but each of them implements io.ReaderFrom, so the data fetch can be separated --[fetchLocation(location string, r io.ReaderFrom)](https://github.com/miku/span/blob/86aeec55853b795e57ad80978f97caedc4000ea2/cmd/span-amsl-discovery/main.go#L130-L139)
+
+----
+
+# io.ReaderFrom is an optional interface
+
+* [Enabling optional optimizations/features](https://blog.merovius.de/2017/07/30/the-trouble-with-optional-interfaces.html)
+
+
+
+----
+
+# Readers for various types
 
 ## Rune
 
-* io.RuneReader
+* io.RuneReader (read a rune)
 * io.RuneScanner (support for rewind)
 
 ## Byte
 
-* io.ByteReader
+* io.ByteReader (read a byte)
 * io.ByteScanner (support for rewind)
 * io.ByteWriter
 
@@ -98,13 +113,15 @@ Example, different JSON API structs, but each of them implements io.ReaderFrom, 
 * response bodies
 * compression algorithms
 * hash sums
-* image, JSON, xml encoders, decoders
-* utilities like counters, test data generators, stream splitters, mutli-readers
-* and much more
+* images
+* JSON and XML encoders and decoders
+* utilities like counters, test data generators, stream splitters, mutli-readers, ... and more
 
 ----
 
 # A simple interface
+
+Reader and Writer are single method interfaces.
 
 ```go
 type Reader interface {
@@ -126,44 +143,58 @@ Few examples for usage and custom implementations.
 
 # Empty reader and Discard
 
-* https://github.com/miku/exploreio/blob/master/Solutions.md#s20
-* https://github.com/miku/exploreio/blob/master/Solutions.md#s22
+* [Empty](https://github.com/miku/exploreio/blob/master/Solutions.md#s20)
+* [Discard](https://github.com/miku/exploreio/blob/master/Solutions.md#s22)
+
+The standard library implementation of [ioutil.Discard](https://github.com/golang/go/blob/ee551846fa015a04aaa55e44e8d9b6647156e301/src/io/ioutil/ioutil.go#L122-L161).
 
 ----
 
 # Example: multireader
 
-* https://github.com/miku/exploreio/blob/master/Solutions.md#s12
+* [MultiReader](https://github.com/miku/exploreio/blob/master/Solutions.md#s12)
 
 ----
 
 # Example: Embedding a reader
 
-* https://github.com/miku/exploreio/blob/master/Solutions.md#s23
+* [Embedding a reader](https://github.com/miku/exploreio/blob/master/Solutions.md#s23)
+
+This is also part of the Go Tour, currently in exercise [methods/23](https://tour.golang.org/methods/23).
 
 ----
 
 # Example: Endless stream
 
-* https://github.com/miku/exploreio/blob/master/Solutions.md#s25
+* [Endless stream](https://github.com/miku/exploreio/blob/master/Solutions.md#s25)
 
 ----
 
 # Example: Blackout
 
-* https://github.com/miku/exploreio/blob/master/s27a/main.go
+* [Censoring reader](https://github.com/miku/exploreio/blob/master/s27a/main.go)
 
 ----
 
 # Example: stickyErrWriter
 
-* https://github.com/miku/exploreio/blob/master/s45/main.go
+* [stickyErrWriter](https://github.com/miku/exploreio/blob/master/s45/main.go)
 
-From [live hacking](https://youtu.be/yG-UaBJXZ80?t=33m50s).
+From [live hacking](https://youtu.be/yG-UaBJXZ80?t=33m50s) with Brad and Andrew.
 
 ----
 
-More:
+# I am a collector of implementations
 
-* https://golang.org/pkg/io/
-* https://github.com/miku/exploreio
+If you happen to come across an interesting implementation, please let me know - E-Mail, via issue on [exploreio](https://github.com/miku/exploreio/), [@cvvfj](https://twitter.com/cvvfj), ...
+
+
+----
+
+# Links:
+
+* https://golang.org/pkg/io/ (docs)
+* https://www.datadoghq.com/blog/crossing-streams-love-letter-gos-io-reader/ (love letter)
+* https://medium.com/go-walkthrough/go-walkthrough-io-package-8ac5e95a9fbd (walkthrough)
+* https://www.youtube.com/watch?v=PAAkCSZUG1c (Go Proverbs, 2015)
+* https://github.com/miku/exploreio (example implementations)
