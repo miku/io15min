@@ -10,6 +10,9 @@ Martin Czygan
 
 * [The bigger the interface, the weaker the abstraction](https://youtu.be/PAAkCSZUG1c?t=5m18s)
 
+
+> More of theses at https://go-proverbs.github.io/
+
 ----
 
 # Exemplified in package io
