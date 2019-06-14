@@ -52,6 +52,8 @@ From: [github.com/go4org/go4](https://github.com/go4org/go4).
 
 # IO interface list
 
+Some utility interfaces, e.g. for multithreaded IO and performance optimizations.
+
 * `io.ReaderAt` (p, off)
 * `io.ReaderFrom` (r)
 * `io.WriterAt` (p, off)
@@ -68,8 +70,8 @@ Sidenote: For filesystems, there is a [pread(2) system call](http://man7.org/lin
 > read from or write to a file descriptor at a given offset ...
 > The pread() and pwrite() system calls are especially useful in **multithreaded applications**.  They allow multiple threads to perform I/O on the **same file descriptor** without being affected by changes to the file offset by other threads.
 
-* HTTP [range request example](https://github.com/snabb/httpreaderat) (on zip without download)
-* see: `examples/rangerequest`
+* HTTP [range request example](https://github.com/snabb/httpreaderat)
+* Example: list archived filenames in remote zip file without download it: [`examples/rangerequest`](https://github.com/miku/io15min/blob/master/examples/rangerequest/main.go) 
 
 ----
 
@@ -85,9 +87,9 @@ Sidenote: For filesystems, there is a [pread(2) system call](http://man7.org/lin
 
 * [Optimizing Copy](https://medium.com/go-walkthrough/go-walkthrough-io-package-8ac5e95a9fbd) 
 
-> To avoid using an intermediate buffer entirely, types can implement interfaces to read and write directly. When implemented, the Copy() function will avoid the intermediate buffer and use these implementations directly.
+> To avoid using an intermediate buffer entirely, types can implement interfaces to read and write directly. When implemented, the Copy() function will **avoid the intermediate buffer** and use these implementations directly.
 
-* maybe: io.ReaderFrom &mdash; a data structure, that know how to deserialize itself
+* maybe not the best use case: io.ReaderFrom &mdash; a data structure, that know how to deserialize itself (maybe better to use an [encoding.TextUnmarshaler](https://golang.org/pkg/encoding/#TextUnmarshaler).
 
 ----
 
@@ -124,6 +126,8 @@ Also known as: [interface upgrade](http://avtok.com/2014/11/05/interface-upgrade
 
 > Example: different JSON API structs, but each of them implements io.ReaderFrom, so the data fetch can be separated --[fetchLocation(location string, r io.ReaderFrom)](https://github.com/miku/span/blob/86aeec55853b795e57ad80978f97caedc4000ea2/cmd/span-amsl-discovery/main.go#L130-L139)
 
+* Better: [`encoding.TextUnmarshaler`](https://golang.org/pkg/encoding/#TextUnmarshaler)
+
 ----
 
 # io.ReaderFrom is an optional interface
@@ -154,7 +158,7 @@ Also known as: [interface upgrade](http://avtok.com/2014/11/05/interface-upgrade
 # Who implements these interfaces?
 
 * files, atomic files
-* buffered io
+* buffered IO
 * network connections
 * response bodies
 * compression algorithms
@@ -206,9 +210,9 @@ Read from an arbitrary number of readers in sequence.
 
 # Example: Embedding a reader
 
-* [Embedding a reader](https://github.com/miku/exploreio/blob/master/Solutions.md#s23)
+* [Embedding a reader](https://github.com/miku/exploreio/blob/master/Solutions.md#s24a) - example of a reader that counts the total number of bytes read.
 
-This is also part of the Go Tour, currently in exercise [methods/23](https://tour.golang.org/methods/23).
+Also: Part of the Go Tour, currently in exercise [methods/23](https://tour.golang.org/methods/23). Left as exercise.
 
 ----
 
