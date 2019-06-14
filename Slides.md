@@ -198,6 +198,8 @@ The standard library implementation of [ioutil.Discard](https://github.com/golan
 
 # Example: multireader
 
+Read from an arbitrary number of readers in sequence.
+
 * [MultiReader](https://github.com/miku/exploreio/blob/master/Solutions.md#s12)
 
 ----
@@ -212,6 +214,8 @@ This is also part of the Go Tour, currently in exercise [methods/23](https://tou
 
 # Example: Endless stream
 
+Generating test data.
+
 * [Endless stream](https://github.com/miku/exploreio/blob/master/Solutions.md#s25)
 
 ----
@@ -223,6 +227,8 @@ This is also part of the Go Tour, currently in exercise [methods/23](https://tou
 ----
 
 # Example: stickyErrWriter
+
+Allows to write multiple times without error checking, because the error sticks around.
 
 * [stickyErrWriter](https://github.com/miku/exploreio/blob/master/s45/main.go)
 
