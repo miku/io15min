@@ -220,13 +220,31 @@ Also: Part of the Go Tour, currently in exercise [methods/23](https://tour.golan
 
 Generating test data.
 
-* [Endless stream](https://github.com/miku/exploreio/blob/master/Solutions.md#s25)
+* [Endless stream](https://github.com/miku/io15min/blob/master/examples/endless/main.go)
+
+```
+$ go run main.go | head -20
+2019-15-06 00:41:35.325 1.6047
+2019-15-06 00:41:35.326 2.2692
+2019-15-06 00:41:35.327 1.8446
+2019-15-06 00:41:35.328 1.9102
+2019-15-06 00:41:35.329 1.8133
+```
 
 ----
 
 # Example: Blackout
 
-* [Censoring reader](https://github.com/miku/exploreio/blob/master/s27a/main.go)
+* [Censoring reader](https://github.com/miku/io15min/blob/master/examples/blackout/main.go)
+
+```
+$ go run main.go 
+
+One morning, when ██ █XX woke from troubled dreams,
+he found himself transformed in his bed into a horrible
+vermin.  He lay on his armour-like back, and if
+he lifted his head a little ...
+```
 
 ----
 
@@ -234,9 +252,9 @@ Generating test data.
 
 Allows to write multiple times without error checking, because the error sticks around.
 
-* [stickyErrWriter](https://github.com/miku/exploreio/blob/master/s45/main.go)
+* [stickyErrWriter](https://github.com/miku/io15min/blob/master/examples/sticky/main.go)
 
-From [live hacking](https://youtu.be/yG-UaBJXZ80?t=33m50s) with Brad and Andrew.
+From [live hacking](https://youtu.be/yG-UaBJXZ80?t=33m50s) an HTTP/2 client with Brad and Andrew.
 
 ----
 
@@ -244,6 +262,7 @@ From [live hacking](https://youtu.be/yG-UaBJXZ80?t=33m50s) with Brad and Andrew.
 
 If you happen to come across an interesting implementation, please let me know - E-Mail, via issue on [exploreio](https://github.com/miku/exploreio/), [@cvvfj](https://twitter.com/cvvfj), ...
 
+![](images/beach40.jpg)
 
 ----
 
