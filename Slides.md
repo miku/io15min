@@ -86,6 +86,30 @@ Sidenote: For filesystems, there is a [pread(2) system call](http://man7.org/lin
 
 * maybe: io.ReaderFrom &mdash; a data structure, that know how to deserialize itself
 
+----
+
+# Use cases | io.ReaderFrom
+
+
+```
+// io.go, https://golang.org/src/io/io.go
+// ...
+// Similarly, if the writer has a ReadFrom method,
+// use it to do the copy.
+
+if rt, ok := dst.(ReaderFrom); ok {
+	return rt.ReadFrom(src)
+}
+```
+
+----
+
+# Use cases | io.ReaderFrom
+
+![](images/readerfrom18.jpg)
+
+----
+
 > Example: different JSON API structs, but each of them implements io.ReaderFrom, so the data fetch can be separated --[fetchLocation(location string, r io.ReaderFrom)](https://github.com/miku/span/blob/86aeec55853b795e57ad80978f97caedc4000ea2/cmd/span-amsl-discovery/main.go#L130-L139)
 
 ----
