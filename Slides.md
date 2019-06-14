@@ -14,7 +14,10 @@ Martin Czygan
 
 # Exemplified in package io
 
-Generic I/O with io.Reader and io.Writer. A few other interfaces:
+Generic I/O with `io.Reader` and `io.Writer` and a few other interfaces.
+
+> https://golang.org/pkg/io/
+
 
 ----
 
@@ -46,16 +49,16 @@ From: [github.com/go4org/go4](https://github.com/go4org/go4).
 
 # IO interface list
 
-* io.ReaderAt (offset)
-* io.ReaderFrom
-* io.WriterAt (offset)
-* io.WriterTo
+* `io.ReaderAt` (p, off)
+* `io.ReaderFrom` (r)
+* `io.WriterAt` (p, off)
+* `io.WriterTo` (w)
 
 ----
 
 # Use cases | io.ReaderAt
 
-* io.ReaderAt, io.WriterAt -- (parallel writes) with offset
+* `io.ReaderAt`, `io.WriterAt` -- (parallel writes) with offset
 
 Sidenote: For filesystems, there is a [pread(2) system call](http://man7.org/linux/man-pages/man2/pread.2.html) in Linux
 
@@ -63,6 +66,15 @@ Sidenote: For filesystems, there is a [pread(2) system call](http://man7.org/lin
 > The pread() and pwrite() system calls are especially useful in **multithreaded applications**.  They allow multiple threads to perform I/O on the **same file descriptor** without being affected by changes to the file offset by other threads.
 
 * HTTP [range request example](https://github.com/snabb/httpreaderat) (on zip without download)
+* see: `examples/rangerequest`
+
+----
+
+# RFC 7233 HTTP Range Requests 
+
+> Likewise, devices with limited local storage might benefit from being able to request only a subset of a larger representation, such as a single page of a very large document, or the dimensions of an embedded image. --https://tools.ietf.org/html/rfc7233#section-1
+
+![](images/rangerequest.png)
 
 ----
 
