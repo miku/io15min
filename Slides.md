@@ -102,6 +102,13 @@ if rt, ok := dst.(ReaderFrom); ok {
 }
 ```
 
+Also known as: [interface upgrade](http://avtok.com/2014/11/05/interface-upgrades.html).
+
+
+>  The zero-copy IO in Go is so elegant.
+
+* https://news.ycombinator.com/item?id=8714051 (174, 2014)
+
 ----
 
 # Use cases | io.ReaderFrom
@@ -109,6 +116,8 @@ if rt, ok := dst.(ReaderFrom); ok {
 ![](images/readerfrom18.jpg)
 
 ----
+
+# Use cases | Bad example (most likely)
 
 > Example: different JSON API structs, but each of them implements io.ReaderFrom, so the data fetch can be separated --[fetchLocation(location string, r io.ReaderFrom)](https://github.com/miku/span/blob/86aeec55853b795e57ad80978f97caedc4000ea2/cmd/span-amsl-discovery/main.go#L130-L139)
 
@@ -118,26 +127,24 @@ if rt, ok := dst.(ReaderFrom); ok {
 
 * [Enabling optional optimizations/features](https://blog.merovius.de/2017/07/30/the-trouble-with-optional-interfaces.html)
 
-
-
 ----
 
 # Readers for various types
 
 ## Rune
 
-* io.RuneReader (read a rune)
-* io.RuneScanner (support for rewind)
+* `io.RuneReader` (read a rune)
+* `io.RuneScanner` (support for rewind)
 
 ## Byte
 
-* io.ByteReader (read a byte)
-* io.ByteScanner (support for rewind)
-* io.ByteWriter
+* `io.ByteReader` (read a byte)
+* `io.ByteScanner` (support for rewind)
+* `io.ByteWriter`
 
 ## String
 
-* io.StringWriter (new in 1.12)
+* `io.StringWriter` (new in 1.12)
 
 ----
 
