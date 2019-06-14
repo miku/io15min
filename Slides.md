@@ -2,7 +2,7 @@
 
 Lightning Talk, Go and Cloud Native Leipzig https://golangleipzig.space
 Martin Czygan
-@BasislagerCo, 2019-05-17, 19:00
+@BasislagerCo, 2019-06-14, 19:00
 
 ----
 
