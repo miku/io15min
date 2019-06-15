@@ -14,7 +14,7 @@ import (
 
 func main() {
 	req, err := http.NewRequest("GET", "https://dl.google.com/go/go1.10.windows-amd64.zip", nil)
-	// https://webhook.site/8b236e4f-b35c-49ac-95ac-29c3367be2fa
+	// To see the transmitted header, uncomment:
 	// req, err := http.NewRequest("GET", "https://webhook.site/8b236e4f-b35c-49ac-95ac-29c3367be2fa", nil)
 	if err != nil {
 		log.Fatal(err)
